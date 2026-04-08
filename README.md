@@ -1,4 +1,4 @@
-# :dragon: wg-on-ec2
+# :dragon: aws-wg-vpn
 
 Create a [WireGuard®](https://www.wireguard.com/) server with as few configuration steps as possible.
 
