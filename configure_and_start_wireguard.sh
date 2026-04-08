@@ -20,7 +20,7 @@ EOF
 [Interface]
 PrivateKey = $(cat /etc/wireguard/client_${idx}_private.key)
 Address = 10.100.0.$1/24
-DNS = 8.8.8.8
+DNS = 1.1.1.1
 
 [Peer]
 PublicKey = $(cat /etc/wireguard/server_public.key)
