@@ -12,14 +12,14 @@ function add_client() {  # First argument is the index of the client, second the
     cat <<EOF >> /etc/wireguard/wg0.conf
 [Peer]
 PublicKey = $(cat /etc/wireguard/client_${idx}_public.key)
-AllowedIPs = 10.0.0.$1/32
+AllowedIPs = 10.100.0.$1/32
 EOF
 
     # Create a client configuration file
     cat <<EOF > /etc/wireguard/client_${idx}.conf
 [Interface]
 PrivateKey = $(cat /etc/wireguard/client_${idx}_private.key)
-Address = 10.0.0.$1/24
+Address = 10.100.0.$1/24
 DNS = 8.8.8.8
 
 [Peer]
@@ -44,10 +44,10 @@ server_public_ip=$(curl -s https://checkip.amazonaws.com/)
 cat <<EOF > /etc/wireguard/wg0.conf
 [Interface]
 PrivateKey = $(cat /etc/wireguard/server_private.key)
-Address = 10.0.0.0/24
+Address = 10.100.0.0/24
 ListenPort = 51820
-PostUp = echo 1 > /proc/sys/net/ipv4/ip_forward; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -s 10.0.0.1./24 -o $default_if_name -j MASQUERADE
-PostDown = echo 0 > /proc/sys/net/ipv4/ip_forward; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -s 10.0.0.1./24 -o $default_if_name -j MASQUERADE
+PostUp = echo 1 > /proc/sys/net/ipv4/ip_forward; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o $default_if_name -j MASQUERADE
+PostDown = echo 0 > /proc/sys/net/ipv4/ip_forward; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o $default_if_name -j MASQUERADE
 EOF
 
 # Enable IP forwarding
