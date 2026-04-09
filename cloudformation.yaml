@@ -17,12 +17,12 @@ Parameters:
 
 Mappings:
   ImageByRegion:
-    eu-central-1:  # Frankfurt
-      ImageId: ami-000b4fe7b39432646
-    ap-northeast-3:  # Osaka
-      ImageId: ami-068f4a4d19bc7b838
     us-east-1:  # Virginia
       ImageId: ami-0ab515046786de9dc
+    us-east-2:  # Ohio
+      ImageId: ami-0823767a63030e222
+    sa-east-1:  # Sao Paulo
+      ImageId: ami-05a73967641e2898e
 
 Resources:
   WireguardServer:
